@@ -1,0 +1,488 @@
+﻿@using PujaService.Application.ViewModels
+@model TemplePujaRateVM
+
+@section StyleToHead{
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
+    <link href="@Url.Content("~/assets/css/view-details.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/css/innerpage.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/css/temple-detail.css")" rel="stylesheet" type="text/css" />
+
+    <!-- BOOTSTRAP CSS AND PLUGINS-->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous">
+    </script>
+
+}
+
+
+
+<div class="container-fluid">
+    @*<div class="row">
+            <section id="detailpage">
+                <h1 class="ben_man">@Model.TempleNameBengali,&nbsp;@Model.LocationNameBengali </h1>
+                <h1 class="nit">@Model.TempleNameEnglish,&nbsp;@Model.LocationNameEnglish</h1>
+
+                @if (Model.TempleMapURL != "")
+                {
+                    <button type="button" class="span4 proj-div" data-toggle="modal" data-target="#GSCCModal"><img src="~/assets/img/loupe.png" alt="loupe"></button>
+                }
+
+                <div class="row">
+                    <div class="col-md-6" style="padding:40px">
+                        <img src="~/assets/uploads/Images/temples/@Model.DetailsPagePic1" alt="image01" class="ka_g img-fluid" style="width: 250px; height: 247px">
+                    </div>
+                    <div class="col-md-6" id="overview" style="padding:40px">
+                        <img src="~/assets/uploads/Images/temples/@Model.DetailsPagePic2" alt="image39 " class="img-fluid" style="width: 250px; height: 247px">
+                    </div>
+                </div>
+            </section>
+        </div>*@
+
+    <div class="row">
+        <div class="col-md-3" style="padding:40px">
+            <img src="~/assets/uploads/Images/temples/@Model.DetailsPagePic1" alt="image01" class="img-fluid">
+        </div>
+        <div class="col-md-6 text-center">
+            <h1 class="ben_man">@Model.TempleNameEnglish,&nbsp;@Model.LocationNameEnglish</h1>
+            <h1 class="nit"> @Model.TempleNameBengali,&nbsp;@Model.LocationNameBengali</h1>
+
+            @if (Model.TempleMapURL != "")
+            {
+                <button type="button" class="mapButton" data-toggle="modal" data-target="#GSCCModal"><img src="~/assets/img/location.png" alt="location"></button>
+            }
+
+        </div>
+        <div class="col-md-3" style="padding:40px">
+            <img src="~/assets/uploads/Images/temples/@Model.DetailsPagePic2" alt="image39 " class="img-fluid">
+        </div>
+    </div>
+
+
+    @if (Model.TempleMapURL != "")
+    {
+        <div id="GSCCModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times; </button>
+                        <h4 class="modal-title" id="myModalLabel">@Model.TempleNameBengali,&nbsp;@Model.LocationNameBengali</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="@Model.TempleMapURL" width="862" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <div class="descrip_kali">
+        <div class="row">
+            <div class="details col-md-6">
+                <p class="marketing_p">
+                    @Model.TempleDescEnglish
+                </p>
+            </div>
+            <div class="preview col-md-6">
+                <p class="description">
+                    @Model.TempleDescBengali
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-10">
+
+        <div class="content-section">
+            <div class="col-md-12">
+
+                @foreach (var puja in Model.PujaList)
+                {
+
+                    <div class="card">
+                        
+                        <div class="container-fliud">
+                            <div class="row" >
+                                <div class="preview col-md-4" id="Sadharan_p_block">
+                                    <h3 class="product-block">@puja.PujaNameEnglish</h3>
+                                    <h2 class="product-block">@puja.PujaNameBengali</h2>
+                                    <img src="~/assets/img/pithali2.png" alt="pithali2.png" class="kah_g">
+                                </div>
+                                <div class="details col-md-4" style="border-width:1px; border-style:solid; border-color:#ffcc99; padding: 1em;">
+                                    @if (puja.PujaDescEnglish != "")
+                                    {
+                                        <p class="product-description">
+                                            <strong>Puja Description:</strong>
+                                            @puja.PujaDescEnglish
+                                        </p>
+                                    }
+                                    @if (puja.PujaMethodEnglish != "")
+                                    {
+                                        <h3>Puja method:</h3>
+                                        <p>
+                                            @puja.PujaMethodEnglish
+                                        </p>
+                                    }
+
+                                    @if (puja.PujaSamagriEnglish != "")
+                                    {
+                                        <h3>Puja materials:</h3>
+
+                                        <p>  @Html.Raw(@puja.PujaSamagriEnglish)</p>
+                                    }
+                                    @if (puja.PujaPrasadEnglish != "")
+                                    {
+
+                                        <h3>Prasad/Arghya:</h3>
+                                        <p>@puja.PujaPrasadEnglish</p>
+
+                                    }
+                                    @if (puja.PujaRateChartVM[0] != null)
+                                    {
+
+                                        <table id="GFGtable">
+                                            <tbody>
+                                                <tr>
+                                                <tr>
+                                                    <!-- TABLE HEADING -->
+                                                    <th>Puja Type </th>
+                                                    <th>Cost(INR)</th>
+                                                    <th>Cost(USD)</th>
+                                                </tr>
+
+                                                <!-- TABLE DATA -->
+                                                @foreach (var ratech in puja.PujaRateChartVM)
+                                                {
+
+                                                    <tr>
+                                                        <td class="normalpuja" id="sadh">  @puja.PujaNameEnglish</td>
+                                                        <td class="normalpuja1">@ratech.RateChartDescEnglish</td>
+                                                        <td class="normalpuja2" id="sadh"> any</td>
+                                                        <td class="normalpuja3">
+                                                            <button class="gfgselect bg-secondary" category="@ratech.RateChartDescEnglish" pujaName="@puja.PujaNameEnglish" PujaID="@puja.PujaId" lan="E" cur="R" PujaRateID="@ratech.PujaRateChartId" templeName="@Model.TempleNameEnglish" Price="@ratech.RateInRupeeEnglish">
+                                                                @ratech.RateInRupeeEnglish
+                                                            </button>
+                                                        </td>
+                                                        <td class="normalpuja4">
+                                                            <button class="gfgselect bg-secondary" category="@ratech.RateChartDescEnglish" pujaName="@puja.PujaNameEnglish" PujaID="@puja.PujaId" lan="E" cur="D" PujaRateID="@ratech.PujaRateChartId" templeName="@Model.TempleNameEnglish" Price="@ratech.RateInUSDEnglish">
+                                                                @ratech.RateInUSDEnglish
+                                                            </button>
+                                                        </td>
+
+                                                    </tr>
+
+
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    }
+                                </div>
+
+
+                                <div class="preview col-md-4" style="border-width:1px; border-style:solid; border-color:#ffcc99; padding: 1em;" >
+                                    @if (puja.PujaDescBengali != "")
+                                    {
+                                        <p class="product-description">
+                                            <strong>পূজা বর্ণনা:</strong>
+                                            @puja.PujaDescBengali
+                                        </p>
+                                    }
+
+                                    @if (puja.PujaMethodBengali != "")
+                                    {
+
+                                        <h3>পূজা পদ্ধতি:</h3>
+
+                                        <p>@puja.PujaMethodBengali</p>
+                                    }
+
+                                    @if (puja.PujaSamagriBengali != "")
+                                    {
+                                        <h3>পূজা সামগ্রী:</h3>
+                                        <p>
+                                            @Html.Raw(@puja.PujaSamagriBengali)
+                                        </p>
+                                    }
+
+                                    @if (puja.PujaPrasadBengali != "")
+                                    {
+                                        <h3>প্রসাদ ও অর্ঘ্য:</h3>
+                                        <p>@puja.PujaPrasadBengali</p>
+
+                                    }
+
+
+                                    @if (puja.PujaRateChartVM[0] != null)
+                                    {
+                                        <table id="GFGtable" class="sadharan_puja">
+                                            <tbody>
+                                                <tr>
+                                                    <!-- TABLE HEADING -->
+                                                    <th id="sadh">পূজা</th>
+                                                    <th>শ্রেণী</th>
+                                                    <th id="sadh"> যে কোনো</th>
+                                                    <th class="priceinr">মূল্য (INR)</th>
+                                                    <th class="priceusd">মূল্য (USD)</th>
+                                                </tr>
+                                                <!-- TABLE DATA -->
+                                                @foreach (var ratech in puja.PujaRateChartVM)
+                                                {
+                                                    <tr>
+                                                        <td class="gfgusername" id="sadh"> @puja.PujaNameBengali </td>
+                                                        <td class="gfgpp">@ratech.RateChartDescBengali</td>
+                                                        <td class="gfgarticles" id="sadh"> যে কোনো</td>
+                                                        <td class="gfgscores">
+                                                            <button class="gfgselect bg-secondary" category="@ratech.RateChartDescBengali" pujaName="@puja.PujaNameBengali" PujaID="@puja.PujaId" lan="B" cur="R" PujaRateID="@ratech.PujaRateChartId" templeName="@Model.TempleNameBengali" Price="@ratech.RateInRupeeBengali">
+                                                                @ratech.RateInRupeeBengali
+                                                            </button>
+                                                        </td>
+                                                        <td class="gfga">
+                                                            <button class="gfgselect bg-secondary" category="@ratech.RateChartDescBengali" pujaName="@puja.PujaNameBengali" PujaID="@puja.PujaId" lan="B" cur="D" PujaRateID="@ratech.PujaRateChartId" templeName="@Model.TempleNameBengali" Price="@ratech.RateInUSDBengali">
+                                                                @ratech.RateInUSDBengali
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    }
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                }
+
+                <input type="hidden" value="0" id="hdnRateID" />
+                <input type="hidden" value="0" id="hdnlangSel" />
+                <input type="hidden" value="0" id="hdnCurrencySel" />
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-2">
+        <div class="sidebar-item">
+            <div class="make-me-sticky">
+                <div class="col-md-12 right_detaiols">
+                    <button type="button">
+                        <a id="mHome" asp-action="coming-soon" asp-controller="home">Panjika</a>
+                        <span><a id="mHome" asp-action="coming-soon" asp-controller="home">পঞ্জিকা</a></span>
+                    </button>
+                    <button type="button">
+                        <a target="_blank" href="https://bengalicalendar.com/">Bangla Calender</a>
+                        <span><a target="_blank" href="https://bengalicalendar.com/">বাংলা ক্যালেন্ডার</a></span>
+                    </button>
+                    <div type="button" data-toggle="modal" data-target="#modal1" id="b1">
+                        @*Pujari Profile
+                        <span>পূজারী পরিচয়</span>*@
+                         <a asp-action="pujari-profile" asp-controller="home">Pujari Profile</a>
+                            <div><a asp-action="pujari-profile" asp-controller="home">পূজারী পরিচয়</a></div>
+                    </div>
+                    <button type="button">
+                        <a asp-action="terms-policies" asp-controller="home">Terms & Policies</a>
+                        <span><a asp-action="terms-policies" asp-controller="home">শর্তাবলী ও নীতিসমূহ</a></span>
+                    </button>
+                    <button type="button">
+                        Need help? Talk to Our <br> Customer Service:<br> +91-6290748530<br>
+                        <span>সহায়তা চাইতে কল করুন<br>+৯১-৬২৯০৭৪৮৫৩০</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="target">
+        <div class="clearfix"></div>
+        <!-- Modal 1 -->
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-body">
+
+                        @foreach (var purohit in Model.Purohit)
+                        {
+                            <div class="row">
+                                <section id="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img src="~/assets/uploads/Images/temples/@Model.TemplePhoto" alt="image003.jpg">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h1 class="pop_h1">@Model.TempleNameEnglish,@Model.LocationNameEnglish</h1>
+                                            <h1>@Model.TempleNameBengali,@Model.LocationNameBengali </h1>
+                                            <h1 class="pop_h1"><label>Our Pujarai:</label> @purohit.PurohitNameEng</h1>
+                                            <h1><label>আমাদের পূজারী:</label> @purohit.PurohitNameBeng</h1>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <img src="~/assets/uploads/Images/purohit/@purohit.Photo" alt="pujari">
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="descrip_kali">
+                                <div class="row">
+                                    <div class="preview col-md-12">
+                                        <p class="description">
+
+                                            @purohit.DescriptionBeng
+                                        </p>
+                                    </div>
+                                    <div class="details col-md-12">
+                                        <p class="marketing_p">
+                                            @purohit.DescriptionEng
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Form-->
+    <div class="modal" id="myModal">
+        <div class="row">
+            <div class="table-responsive">
+                <div class="booking-form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="form-header">
+                        <h1>Please furnish the below details in order to execute your puja request</h1>
+                        <h2>আপনার পূজা অনুরোধটি কার্যকর করতে দয়া করে নীচের বিবরণগুলি সরবরাহ করুন</h2>
+                    </div>
+                    <form method="post" asp-controller="user" asp-action="CheckData" id="frmPujaDetails">
+
+                        <input type="hidden" id="hdnPujaRateID" name="hdnPujaRateID" value="0" />
+                        <input type="hidden" id="hdnPujalang" name="hdnPujalang" value="" />
+                        <input type="hidden" id="hdnPujaCurency" name="hdnPujaCurency" value="" />
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">Name:<input class="form-control" type="text" placeholder="Name" id="txtName" name="txtName"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    Gotra:<input class="form-control" type="text" placeholder="Gotra" id="txtGotra" name="txtGotra">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" id="gen">
+                                    Gender: <input type="radio" id="male" name="rad_Gender" value="M">
+                                    <label for="male">Male</label>
+                                    <input type="radio" id="female" name="rad_Gender" value="F">
+                                    <label for="female">Female</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="gen">
+                                    <label for="male">Puja Date:</label>
+                                    <input class="ml-1" type="date" name="date" id="date">
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                        Address(please provide complete postal address with Pin code):
+                        <textarea rows="3" cols="20"></textarea>
+                    </div>
+                    <div class="form-group">
+                        Nearest Land Mark:<input class="form-control" type="text" placeholder="Nearest Land Mark:">
+                    </div>*@
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    Country: <select id="ddlCountry" name="ddlCountry" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    State:<select id="ddlState" name="ddlState" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-btn">
+                                <button class="submit-btn" id="book_b">Submit</button>
+                            </div>
+                            <div class="col-md-6 form-btn2"><input type='reset' name='reset' value='Reset'></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    <!--Modal Form End-->
+
+    <div class="modal" id="myModalCalender">
+        <div class="row">
+            <div class="booking-form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="form-header">
+                    <h2>আপনার পূজা অনুরোধটি কার্যকর করতে দয়া করে নীচের বিবরণগুলি সরবরাহ করুন</h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <iframe src="https://bengalicalendar.com/embed/index.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:0px; overflow:hidden; width:221px; height:205px;" allowtransparency="true"></iframe>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/assets/js/json2.js")"></script>
+    <script src="@Url.Content("~/js/tmplDetail.js")"></script>
+
+}
